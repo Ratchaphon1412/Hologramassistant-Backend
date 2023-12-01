@@ -80,6 +80,19 @@ django = ">=3.0"
 pytz = "*"
 
 [[package]]
+name = "drf-generators"
+version = "0.5.0"
+description = "Generate DRF Serializers, Views, and urls for your API application."
+optional = false
+python-versions = "*"
+files = [
+    {file = "drf-generators-0.5.0.tar.gz", hash = "sha256:b457c871b5758650552aac1a31655bb8631fcc959a1b578019ce576c39df05e9"},
+]
+
+[package.dependencies]
+Django = ">=1.11"
+
+[[package]]
 name = "markdown"
 version = "3.5.1"
 description = "Python implementation of John Gruber's Markdown."
@@ -151,4 +164,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "fa01440b7525c2583ebff54b4ec5fb5ef9c1ecf606e50958a9424312b6a1c43a"
+content-hash = "d041e76b410d86fbe44cd8ac2da2f00d5fc5298245aa79516b1e0ced967ff98b"
