@@ -1,0 +1,38 @@
+version: "3"
+services:
+  assistant:
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: poetry run python3 manage.py runserver  0.0.0.0:8024
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - DEBUG=${DEBUG}
+    ports:
+      - "8024:8024"
+    networks:
+      - assistant-network
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: assistant
+      MYSQL_USER: assistant
+      MYSQL_PASSWORD: assistant
+      MYSQL_ROOT_PASSWORD: assistant
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - assistant-network
+networks:
+  assistant-network:
+    driver: bridge
