@@ -1,0 +1,2 @@
+- [django-environ](https://django-environ.readthedocs.io/en/latest/quickstart.html)
+- [geopy](https://geopy.readthedocs.io/en/stable/)

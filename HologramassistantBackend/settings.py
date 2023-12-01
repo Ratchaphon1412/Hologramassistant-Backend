@@ -37,6 +37,14 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
+WIT_API = env('WIT_API')
+WEATHER_API = env('WEATHER_API')
+RAPID_API = env('RAPID_API')
+GOOGLE_API = env('GOOGLE_API')
+GOOGLE_MAP_API = env('GOOGLE_MAP_API')
+PLAY_HT_API_AUTHORIZATION = env('PLAYHT_API_AUTHORIZATION')
+PLAY_API_UserID = env('PLAY_API_USERID')
+CHAT_GPT_OPENAI_KEY = env('CHATGPT_OPENAI_KEY')
 
 # Application definition
 
@@ -60,6 +68,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = "HologramassistantBackend.urls"
 
