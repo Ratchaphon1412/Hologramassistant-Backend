@@ -1,2 +1,4 @@
 - [django-environ](https://django-environ.readthedocs.io/en/latest/quickstart.html)
 - [geopy](https://geopy.readthedocs.io/en/stable/)
+- [channels](https://channels.readthedocs.io/en/latest/introduction.html)
+- [openai](https://github.com/openai/openai-python)
