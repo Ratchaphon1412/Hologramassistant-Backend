@@ -9,6 +9,14 @@ services:
     environment:
       - SECRET_KEY=${SECRET_KEY}
       - DEBUG=${DEBUG}
+      - WIT_API=${WIT_API}
+      - WEATHER_API=${WEATHER_API}
+      - RAPID_API=${RAPID_API}
+      - GOOGLE_API=${GOOGLE_API}
+      - GOOGLE_MAP_API=${GOOGLE_MAP_API}
+      - PLAYHT_API_AUTHORIZATION=${PLAYHT_API_AUTHORIZATION}
+      - PLAY_API_USERID=${PLAY_API_USERID}
+      - CHATGPT_OPENAI_KEY=${CHATGPT_OPENAI_KEY}
     ports:
       - "8024:8024"
     networks:
@@ -31,6 +39,7 @@ services:
       retries: 10
     volumes:
       - ./db:/var/lib/mysql
+      - /tmp/app/mysqld:/var/run/mysqld
     networks:
       - assistant-network
 networks:
