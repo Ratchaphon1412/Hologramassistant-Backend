@@ -14,13 +14,12 @@ from pathlib import Path
 import environ
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
+# Take environment variables from .env file
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,8 +28,6 @@ env = environ.Env(
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
-# Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
@@ -42,10 +39,10 @@ WEATHER_API = env('WEATHER_API')
 RAPID_API = env('RAPID_API')
 GOOGLE_API = env('GOOGLE_API')
 GOOGLE_MAP_API = env('GOOGLE_MAP_API')
-PLAY_HT_API_AUTHORIZATION = env('PLAYHT_API_AUTHORIZATION')
+PLAYHT_API_AUTHORIZATION = env('PLAYHT_API_AUTHORIZATION')
 PLAY_API_UserID = env('PLAY_API_USERID')
 CHAT_GPT_OPENAI_KEY = env('CHATGPT_OPENAI_KEY')
-
+BACKEND_URL = env('BACKEND_URL')
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,6 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'drf_generators',
     'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -87,6 +85,8 @@ TEMPLATES = [
         },
     },
 ]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 WSGI_APPLICATION = "HologramassistantBackend.wsgi.application"
 
