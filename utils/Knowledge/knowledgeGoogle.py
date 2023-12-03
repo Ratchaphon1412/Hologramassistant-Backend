@@ -1,8 +1,9 @@
+from django.conf import settings
 import json
 import requests
-import openai
-from django.conf import settings
+from openai import OpenAI
 
+client = OpenAI(api_key=settings.CHAT_GPT_OPENAI_KEY)
 
 
 class KnowledgeGoogle:
@@ -23,12 +24,12 @@ class KnowledgeGoogle:
         print(response.text)
         articleList = []
         listData = json.loads(response.text)
-        if(listData['itemListElement'] != None):
+        if (listData['itemListElement'] != None):
             if (len(listData['itemListElement']) != 0):
                 for diclist in listData['itemListElement']:
-                    if('result' in diclist):
-                        if('detailedDescription' in diclist['result']):
-                            if('articleBody' in diclist['result']['detailedDescription']):
+                    if ('result' in diclist):
+                        if ('detailedDescription' in diclist['result']):
+                            if ('articleBody' in diclist['result']['detailedDescription']):
                                 articleList.append(
                                     diclist['result']['detailedDescription']['articleBody'])
         else:
@@ -37,7 +38,7 @@ class KnowledgeGoogle:
         return articleList
 
     def nearPlaceRestaurant(self, lat, long):
-        print(lat,long)
+        print(lat, long)
         endpoint = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat}%2C{long}&radius=1500&type=restaurant&key={self.googleMapKey}&language=th"
         print(endpoint)
         print(self.googleMapKey)
@@ -57,19 +58,17 @@ class KnowledgeGoogle:
 
         return list_restaurant
 
-    def ChatGPT_conversation( self,conversation):
-        openai.api_key = settings.CHAT_GPT_OPENAI_KEY
+    def ChatGPT_conversation(self, conversation):
+
         model_id = 'gpt-3.5-turbo'
-     
-        response = openai.ChatCompletion.create(
-            
-            model=model_id,
-            messages=conversation
-        )
+
+        response = client.chat.completions.create(model=model_id,
+                                                  messages=conversation)
         # api_usage = response['usage']
         # print('Total token consumed: {0}'.format(api_usage['total_tokens']))
         # stop means complete
         # print(response['choices'][0].finish_reason)
         # print(response['choices'][0].index)
-        conversation.append({'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
+        conversation.append(
+            {'role': response.choices[0].message.role, 'content': response.choices[0].message.content})
         return conversation
