@@ -17,7 +17,7 @@ from .serializers import UserProfilesSerializer
 
 # @method_decorator(csrf_protect, name='dispatch')
 class UserProfilesAPI(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = []
     
     def get(self,request):
         serializer = UserProfilesSerializer(request.user)
