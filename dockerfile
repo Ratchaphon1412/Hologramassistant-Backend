@@ -9,7 +9,9 @@ RUN pip install poetry
 WORKDIR /app
 
 COPY ./pyproject.toml /app/
-COPY ./poetry.lock /app/
+
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev --no-interaction --no-ansi
+
+EXPOSE 8024
