@@ -6,9 +6,9 @@ from rest_framework import authentication, permissions
 
 from .models import UserProfiles
 from .serializers import UserProfilesSerializer
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
-from rest_framework.permissions import BasePermission
+# from django.utils.decorators import method_decorator
+# from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
+# from rest_framework.permissions import BasePermission
 
 
 
@@ -33,9 +33,9 @@ class UserProfilesAPI(APIView):
             return Response({"message":"Register User Success"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@method_decorator(ensure_csrf_cookie, name='dispatch')
-class GetCSRFToken(APIView):
-    authentication_classes = []
-    permission_classes = []
-    def get(self, request):
-        return Response({"csrftoken": "success"})
+# @method_decorator(ensure_csrf_cookie, name='dispatch')
+# class GetCSRFToken(APIView):
+#     authentication_classes = []
+#     permission_classes = []
+#     def get(self, request):
+#         return Response({"csrftoken": "success"})
