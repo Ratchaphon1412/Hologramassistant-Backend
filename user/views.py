@@ -15,7 +15,7 @@ from rest_framework.permissions import BasePermission
 
 
 
-@method_decorator(csrf_protect, name='dispatch')
+# @method_decorator(csrf_protect, name='dispatch')
 class UserProfilesAPI(APIView):
     # permission_classes = [permissions.IsAuthenticated]
     
