@@ -17,82 +17,86 @@ class textTTS:
         self.playhtHeader = playhtHeader
 
     def changetextTV(self, text):
-        url = "https://voicerss-text-to-speech.p.rapidapi.com/"
+        # url = "https://voicerss-text-to-speech.p.rapidapi.com/"
 
-        querystring = {"key": "4ce978988ca4480e99d37e13a6f4abf8"}
+        # querystring = {"key": "4ce978988ca4480e99d37e13a6f4abf8"}
 
-        payload = {
-            "src": text,
-            "hl": "th-th",
-            "r": "0",
-            "c": "mp3",
-            "f": "8khz_8bit_mono"
-        }
+        # payload = {
+        #     "src": text,
+        #     "hl": "th-th",
+        #     "r": "0",
+        #     "c": "mp3",
+        #     "f": "8khz_8bit_mono"
+        # }
 
-        headers = {
-            "content-type": "application/x-www-form-urlencoded",
-            "X-RapidAPI-Key": "091aed48d7mshac28a14304d11cap1182e7jsn2d5daa5546cc",
-            "X-RapidAPI-Host": "voicerss-text-to-speech.p.rapidapi.com"
-        }
-
-        response = requests.post(
-            url, data=payload, headers=headers, params=querystring)
-
-        print(response.content)
-
-        filename = f'{datetime.now().strftime("%Y%m%d%H%M%S")}.mp3'
-
-        with open(f'media/temp/' + filename, 'wb+') as f:
-            # f.write(response.content)
-            for chunk in response.iter_content(chunk_size=1024):
-                f.write(chunk)
-
-        return settings.BACKEND_URL + '/media/temp/' + filename
-
-        # endpoint = "https://api.play.ht/api/v1/"
-        # print(self.playhtHeader['Authorization'])
-        # print(self.playhtHeader['X-User-ID'])
         # headers = {
-
-        #     "AUTHORIZATION": self.playhtHeader['Authorization'],
-        #     'X-USER-ID': self.playhtHeader['X-User-ID'],
-
+        #     "content-type": "application/x-www-form-urlencoded",
+        #     "X-RapidAPI-Key": "091aed48d7mshac28a14304d11cap1182e7jsn2d5daa5546cc",
+        #     "X-RapidAPI-Host": "voicerss-text-to-speech.p.rapidapi.com"
         # }
-        # payloads = {
-        #     "voice": 'th-TH-NiwatNeural',
-        #     "content": [text],
-        #     "title": 'test'
-        # }
+
         # response = requests.post(
-        #     endpoint+'convert', headers=headers, json=payloads)
-        # time.sleep(8)
-        # # await asyncio.sleep(10)
-        # print(response.text)
+        #     url, data=payload, headers=headers, params=querystring)
 
-        # dic_response = json.loads(response.text)
-        # print(dic_response)
-        # # print(dic_response['status'])
-        # if (dic_response['status'] == 'CREATED'):
-        #     responseVoice = requests.get(
-        #         endpoint + 'articleStatus?transcriptionId=' + dic_response['transcriptionId'], headers=headers)
-        #     print(dic_response['transcriptionId'])
-        #     print(responseVoice.text)
-        #     dic_responseVoice = json.loads(responseVoice.text)
-        #     print(dic_responseVoice)
-        #     # print(dic_responseVoice['audioUrl'])
-        #     if (dic_responseVoice.get('audioUrl') != None):
-        #         return dic_responseVoice['audioUrl']
-        #     else:
-        #         return None
+        # print(response.content)
+
+        # filename = f'{datetime.now().strftime("%Y%m%d%H%M%S")}.mp3'
+
+        # with open(f'media/temp/' + filename, 'wb+') as f:
+        #     # f.write(response.content)
+        #     for chunk in response.iter_content(chunk_size=1024):
+        #         f.write(chunk)
+
+        # return settings.BACKEND_URL + '/media/temp/' + filename
+
+        endpoint = "https://api.play.ht/api/v1/"
+        print(self.playhtHeader['Authorization'])
+        print(self.playhtHeader['X-User-ID'])
+        headers = {
+
+            "AUTHORIZATION": self.playhtHeader['Authorization'],
+            'X-USER-ID': self.playhtHeader['X-User-ID'],
+
+        }
+        payloads = {
+            "voice": 'th-TH-NiwatNeural',
+            "content": [text],
+            "title": 'test'
+        }
+        response = requests.post(
+            endpoint+'convert', headers=headers, json=payloads)
+        time.sleep(8)
+        # await asyncio.sleep(10)
+        print(response.text)
+
+        dic_response = json.loads(response.text)
+        print(dic_response)
+        # print(dic_response['status'])
+        if (dic_response['status'] == 'CREATED'):
+            responseVoice = requests.get(
+                endpoint + 'articleStatus?transcriptionId=' + dic_response['transcriptionId'], headers=headers)
+            print(dic_response['transcriptionId'])
+            print(responseVoice.text)
+            dic_responseVoice = json.loads(responseVoice.text)
+            print(dic_responseVoice)
+            # print(dic_responseVoice['audioUrl'])
+            if (dic_responseVoice.get('audioUrl') != None):
+                return dic_responseVoice['audioUrl']
+            else:
+                return None
         # client = Client(
-        #     user_id="hREn3wmcLRTEwxYWgXTMugQj0yg2",
-        #     api_key="54ae039a5cb74f9d9bbb4bfdb5f37c37",
+        #     user_id="vD41VMMqWoUWDrFViMdT6C7ecwe2",
+        #     api_key="3923110b70874785bfc512add693bc82",
         # )
         # options = TTSOptions(
         #     voice="s3://voice-cloning-zero-shot/d9ff78ba-d016-47f6-b0ef-dd630f59414e/female-cs/manifest.json")
-        # for chunk in client.tts("Can you tell me your account email or, ah your phone number?", options):
-        #     # do something with the audio chunk
-        #     print(type(chunk))
+        # filename = datetime.now().strftime("%Y%m%d%H%M%S") + ".mp3"
+        # filepath = f"media/temp/{filename}"
+        # with open(filepath, "wb") as f:
+        #     for chunk in client.tts(text, options):
+        #         f.write(chunk)
+        # return filepath
+            
 
         return None
 

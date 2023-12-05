@@ -6,11 +6,11 @@ from .knowledgeGoogle import KnowledgeGoogle
 
 
 class Knowlegde(Geolocation, Nlg, Weather, KnowledgeGoogle):
-    def __init__(self, weatherAPI, rapidAPI, googleAPI, googleMapAPI):
+    def __init__(self, weatherAPI, rapidAPI, googleAPI, googleMapAPI,chatGPTToken):
         Geolocation.__init__(self, rapidAPI)
         Nlg.__init__(self)
         Weather.__init__(self, weatherAPI)
-        KnowledgeGoogle.__init__(self, googleAPI, googleMapAPI)
+        KnowledgeGoogle.__init__(self, googleAPI, googleMapAPI,chatGPTToken)
         # self.CORE_LOCATION = CoreLocationMacOS.alloc().init()
 
     def weather(self, entities):

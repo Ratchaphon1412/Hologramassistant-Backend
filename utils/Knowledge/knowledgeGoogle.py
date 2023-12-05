@@ -3,13 +3,14 @@ import json
 import requests
 from openai import OpenAI
 
-client = OpenAI(api_key=settings.CHAT_GPT_OPENAI_KEY)
+
 
 
 class KnowledgeGoogle:
-    def __init__(self, googleAPI, googleMapAPI):
+    def __init__(self, googleAPI, googleMapAPI,chatGPTToken):
         self.googleKey = googleAPI
         self.googleMapKey = googleMapAPI
+        self.chatGPTToken = chatGPTToken
 
     def findknowledgeGoogle(self, text):
         endpoint = 'https://kgsearch.googleapis.com/v1/entities:search'
@@ -59,6 +60,7 @@ class KnowledgeGoogle:
         return list_restaurant
 
     def ChatGPT_conversation(self, conversation):
+        client = OpenAI(api_key=self.chatGPTToken)
 
         model_id = 'gpt-3.5-turbo'
 

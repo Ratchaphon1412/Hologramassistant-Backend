@@ -21,17 +21,17 @@ from .models import Location, DHT22
 
 # Create your views here.
 
-knowledge = Knowlegde(settings.WEATHER_API, settings.RAPID_API,
-                      settings.GOOGLE_API, settings.GOOGLE_API)
+
 wit = Wit(settings.WIT_API)
+
 textToSpeechURL = textTTS({
     "Authorization": settings.PLAYHT_API_AUTHORIZATION,
-    "X-User-ID": 'hREn3wmcLRTEwxYWgXTMugQj0yg2',
+    "X-User-ID": 'ykh4t5m4GKXmS5uMnN8heUyoltv1',
 })
 
 
 class AssistantAPI(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, format=None):
         if request.body.decode('utf-8'):
@@ -46,7 +46,7 @@ class AssistantAPI(APIView):
 
 
 class KnowledgeAPI(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
         if request.body.decode('utf-8'):
@@ -54,6 +54,9 @@ class KnowledgeAPI(APIView):
             conversation = []
             conversation.append(
                 {'role': 'user', 'content': requestJson.get('question')})
+            
+            knowledge = Knowlegde(settings.WEATHER_API, settings.RAPID_API,
+                      settings.GOOGLE_API, settings.GOOGLE_API,request.user.openai_token)
 
             conversation = knowledge.findsomething(conversation)
             text = '{0}'.format(conversation[-1]['content'].strip())
@@ -64,7 +67,7 @@ class KnowledgeAPI(APIView):
 
 
 class TextToSpeech(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
         if request.body.decode('utf-8'):
@@ -77,20 +80,25 @@ class TextToSpeech(APIView):
 
 
 class WeatherAPI(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
         if request.body.decode('utf-8'):
             requestJson = json.loads(request.body.decode('utf-8'))
+            knowledge = Knowlegde(settings.WEATHER_API, settings.RAPID_API,
+                      settings.GOOGLE_API, settings.GOOGLE_API,request.user.openai_token)
             text = knowledge.weather(requestJson.get('city'))
 
             return Response({'weather': text})
 
 
 class GoogleMapAPI(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def post(self, request):
         if request.body.decode('utf-8'):
             requestJson = json.loads(request.body.decode('utf-8'))
+            knowledge = Knowlegde(settings.WEATHER_API, settings.RAPID_API,
+                      settings.GOOGLE_API, settings.GOOGLE_API,request.user.openai_token)
             text = knowledge.findRestaurantNearMe(
                 requestJson.get('lat'), requestJson.get('long'))
 
@@ -98,6 +106,7 @@ class GoogleMapAPI(APIView):
 
 
 class GeolocationIOT(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def post(self, request):
         if request.body.decode('utf-8'):
             requestJson = json.loads(request.body.decode('utf-8'))
@@ -124,11 +133,14 @@ class GeolocationIOT(APIView):
 
 
 class showGoogleMap(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def post(self, request):
         if request.body.decode('utf-8'):
             requestJson = json.loads(request.body.decode('utf-8'))
             if requestJson.get('place'):
                 place = requestJson.get('place')
+                knowledge = Knowlegde(settings.WEATHER_API, settings.RAPID_API,
+                      settings.GOOGLE_API, settings.GOOGLE_API,request.user.openai_token)
                 lat, long, description = knowledge.showMapGoogle(place)
 
                 return Response({'lat': lat, 'long': long, 'description': description})
@@ -140,6 +152,8 @@ class DHTSensorIOT(APIView):
     def get(self, request):
 
         dht = DHT22.objects.get(id=1)
+        knowledge = Knowlegde(settings.WEATHER_API, settings.RAPID_API,
+                      settings.GOOGLE_API, settings.GOOGLE_API,request.user.openai_token)
         text = knowledge.getDHTSensor(dht.temperature, dht.humidity)
         return Response({'ans': text})
 
