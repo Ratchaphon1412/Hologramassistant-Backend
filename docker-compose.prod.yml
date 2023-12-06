@@ -58,7 +58,7 @@ services:
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
-      - ./cerbot/conf/live/:/etc/nginx/ssl/live/:rw
+      - ./certbot/conf/live/:/etc/nginx/ssl/live/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
     networks:
       - assistant-network
