@@ -35,10 +35,11 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*', 'https://assistant.backend.ratchaphon1412.co']
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-#     'https://hologramassistant-frontend-ratchaphon1412.vercel.app'
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'https://hologramassistant-frontend-ratchaphon1412.vercel.app'
+]
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
