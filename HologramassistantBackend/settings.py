@@ -33,12 +33,13 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'https://assistant.backend.ratchaphon1412.co']
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'https://hologramassistant-frontend-ratchaphon1412.vercel.app'
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'https://hologramassistant-frontend-ratchaphon1412.vercel.app'
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 WIT_API = env('WIT_API')
