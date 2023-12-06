@@ -37,7 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://hologramassistant-frontend-ratchaphon1412.vercel.app/'
+    'https://hologramassistant-frontend-ratchaphon1412.vercel.app'
 ]
 CORS_ALLOW_CREDENTIALS = True
 
