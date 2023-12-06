@@ -3,3 +3,5 @@ db/
 __pycache__/
 poetry.lock
 staticfiles/
+ssl/fullchain.pem
+ssl/privkey.pem
