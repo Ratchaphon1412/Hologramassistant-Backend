@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://hologramassistant-frontend-ratchaphon1412.vercel.app/'
 ]
 CORS_ALLOW_CREDENTIALS = True
 
@@ -69,7 +70,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",# cors
+    "corsheaders.middleware.CorsMiddleware",  # cors
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -124,7 +125,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ],
 
-    
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
 
         'rest_framework_simplejwt.authentication.JWTAuthentication',
