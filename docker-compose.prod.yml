@@ -50,7 +50,7 @@ services:
     volumes:
       - ./Nginx:/etc/nginx/conf.d
       - ./certbot/www/:/var/www/certbot/:ro
-      - ./certbot/conf/live/:/etc/nginx/ssl/live/:rw
+      - ./certbot/conf/live/:/etc/nginx/ssl/live/:ro
     depends_on:
       - assistant
     networks:
