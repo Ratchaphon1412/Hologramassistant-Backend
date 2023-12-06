@@ -42,6 +42,16 @@ services:
       - /tmp/app/mysqld:/var/run/mysqld
     networks:
       - assistant-network
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./Nginx:/etc/nginx/conf.d
+    depends_on:
+      - assistant
+    networks:
+      - assistant-network
 networks:
   assistant-network:
     driver: bridge
