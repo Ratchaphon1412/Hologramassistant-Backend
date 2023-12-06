@@ -62,16 +62,17 @@ class Nlg:
         text += "ต้องการไปร้านไหนไหมครับ"
 
         return text
-    
-    def ansShowMap(self,lat,long,place,text):
-        start=['นี่คือภาพ แผนที่ ','นี่คือแผนที่ ','นี่คือแมป ']
-        
-        text = start[random.randrange(0, 3)] + place + " ที่อยู่คือ " + text + " ละติจูด " + str(lat) + " ลองติจูด " + str(long) + " ครับ"
-        
+
+    def ansShowMap(self, lat, long, place, text):
+        start = ['นี่คือภาพ แผนที่ ', 'นี่คือแผนที่ ', 'นี่คือแมป ']
+
+        text = start[random.randrange(0, 3)] + place + " ที่อยู่คือ " + \
+            text + " ละติจูด " + str(lat) + " ลองติจูด " + str(long)
+
         return text
-    
-    def ansDHTSensor(self,temperature,humidity):
-        start=['อุณหภูมิปัจจุบัน ','อุณหภูมิ ','อุณหภูมิตอนนี้ ']
-        text = "จาก เซนเซอร์" + start[random.randrange(0, 3)] + str(temperature) + " องศาเซลเซียส ความชื้นปัจจุบัน " + str(humidity) 
+
+    def ansDHTSensor(self, temperature, humidity):
+        start = ['อุณหภูมิปัจจุบัน ', 'อุณหภูมิ ', 'อุณหภูมิตอนนี้ ']
+        text = "จาก เซนเซอร์" + start[random.randrange(0, 3)] + str(
+            temperature) + " องศาเซลเซียส ความชื้นปัจจุบัน " + str(humidity)
         return text
-        
